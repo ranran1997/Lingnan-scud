@@ -6,6 +6,7 @@ import router from './router'
 import VueAwesomeSwiper from 'vue-awesome-swiper'
 
 require('swiper/dist/css/swiper.css')
+require('./assets/style.css')
 
 Vue.use(VueAwesomeSwiper)
 

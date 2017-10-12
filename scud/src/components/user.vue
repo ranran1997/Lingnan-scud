@@ -1,16 +1,38 @@
 <template>
   <div>
-    <div class="header">
-      <div class="basic-info"></div>
-      <div class="balance-info">
-        <div class="coupons"></div>
-        <div class="balance"></div>
-        <div class="recharge"></div>
+    <div class="user">
+      <div class="basic-info">
+        <div class="avatar">
+          <img src="./../assets/1.png" width="80" height="80" alt="">
+        </div>
+        <div class="phone">18888888888</div>
+      </div>
+    </div>
+    <div class="balance-info">
+      <div class="coupons">
+        <div class="value">6</div>
+        <div class="name">优惠券</div>
+      </div>
+      <div class="balance">
+        <div class="value">0.00</div>
+        <div class="name">账号余额</div>
+      </div>
+      <div class="recharge">
+        <div class="value">充值优惠</div>
+        <div class="name">去充值</div>
       </div>
     </div>
     <div class="record">
-      <div class="order">我的订单</div>
-      <div class="receipt">收货记录</div>
+      <div class="order">
+        <span class="icon-paste"></span>
+        <span class="record-name">我的订单</span>
+        <span class="icon-chevron-right"></span>
+      </div>
+      <div class="receipt">
+        <span class="icon-clipboard"></span>
+        <span class="record-name">收货记录</span>
+        <span class="icon-chevron-right"></span>
+      </div>
     </div>
   </div>
 </template>
@@ -25,33 +47,55 @@
   html{
     font-size: 16px;
   }
-  .header{
+  .user{
     width: 100%;
-    height: 520px;
+    height: 320px;
     background-color: #fff;
     position: relative;
+    background: url("./../assets/user-back.jpg") no-repeat;
+    background-size: cover;
   }
   .basic-info{
     width: 240px;
-    height: 240px;
+    height: 200px;
     position: absolute;
-    top: 40px;
+    top: 80px;
     left: 50%;
     margin-left: -120px;
-    background-color: #aaa;
+  }
+  .avatar{
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    border: 1px solid #fff;
+    margin: 0 auto;
+  }
+  .phone{
+    margin-top: 20px;
+    font-size: 1.5rem;
+    color: #fff;
   }
   .balance-info{
-    position: absolute;
-    left: 0;
-    bottom: 0;
+    margin-top: 40px;
     display: flex;
     width: 100%;
-    height: 200px;
+    height: 140px;
+    background-color: #fff;
   }
-  .balance-info div{
+  .balance-info>div:nth-child(1),.balance-info>div:nth-child(2){
+    border-right: 1px dashed #999;
+  }
+  .balance-info>div{
     flex: 1;
-    margin: 3px;
-    background-color: #bbb;
+    padding: 40px 0;
+    line-height: 1;
+  }
+  .balance-info>div .value{
+    margin-bottom: 10px;
+    font-size: 1.4rem;
+  }
+  .balance-info>div .name{
+    font-size: 1rem;
   }
   .record{
     width: 100%;
@@ -59,7 +103,32 @@
     margin-top: 40px;
   }
   .record div{
-    height: 60px;
-    background-color: #999;
+    height: 70px;
+    background-color: #fff;
+  }
+  .record-name{
+    width: 200px;
+    height: 70px;
+    line-height: 70px;
+    font-size: 1.6rem;
+    text-align: left;
+    float: left;
+  }
+  .icon-paste,.icon-clipboard{
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    float: left;
+    font-size: 1.6rem;
+  }
+  .icon-chevron-right{
+    width: 70px;
+    height: 70px;
+    line-height: 70px;
+    float: right;
+    font-size: 1.6rem;
+  }
+  .order{
+    border-bottom: 1px solid #ddd;
   }
 </style>
