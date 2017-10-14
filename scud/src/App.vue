@@ -1,19 +1,10 @@
 <template>
   <div id="app">
-    <v-header></v-header>
     <router-view></router-view>
   </div>
 </template>
 
 <script>
-  import header from '@/components/header'
-
-  export default {
-    name: 'app',
-    components: {
-      'v-header': header
-    }
-  }
 </script>
 <style>
   *{
@@ -26,5 +17,7 @@
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
   color: #2c3e50;
+    width: 100%;
+    height: 100%;
   }
 </style>
