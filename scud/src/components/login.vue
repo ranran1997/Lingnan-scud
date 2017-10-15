@@ -77,7 +77,7 @@
     margin-left: -250px;
     margin-top: -250px;
     border-radius: 10px;
-    box-shadow: -10px 0px 45px #ddd, 0px -5px 15px #ddd, 10px 0px 45px #ddd, 0px 20px 65px #ddd;
+    box-shadow: -10px 0px 45px rgba(0,0,0,0.15), 0px -5px 15px rgba(0,0,0,0.15), 10px 0px 45px rgba(0,0,0,0.15), 0px 20px 85px rgba(0,0,0,0.15);
     z-index: 10;
   }
   .login-submit{
