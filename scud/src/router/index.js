@@ -7,6 +7,7 @@ import errand from '@/components/errand'
 import entrance from '@/components/entrance'
 import login from '@/components/login'
 import register from '@/components/register'
+import error from '@/components/error'
 
 Vue.use(Router)
 
@@ -51,6 +52,10 @@ export default new Router({
       name: 'register',
       component: register,
       meta: { auth: false }
+    },
+    {
+      path: '*',
+      component: error
     }
   ]
 })

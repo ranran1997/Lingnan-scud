@@ -3,7 +3,7 @@
     <div class="user">
       <div class="basic-info">
         <div class="avatar">
-          <img src="./../assets/1.png" width="80" height="80" alt="">
+          <img src="./../assets/user1.png" width="80" height="80" alt="">
         </div>
         <div class="phone">18888888888</div>
       </div>
