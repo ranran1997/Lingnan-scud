@@ -136,15 +136,17 @@
     font-size: 1.6rem;
   }
   .show-login-link-enter-active {
-    transition: all .8s ease;
+    transition: all .4s ease;
   }
   .show-login-link-enter,.show-login-link-leave-to{
+    transform: scale(0.9) translateY(20px);
     opacity: 1;
   }
   .show-register-link-enter-active {
-    transition: all .8s ease;
+    transition: all .4s ease;
   }
   .show-register-link-enter,.show-register-link-leave-to{
+    transform: scale(0.9) translateY(-20px);
     opacity: 1;
   }
 </style>

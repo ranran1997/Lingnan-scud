@@ -137,12 +137,13 @@
     float: left;
   }
   .show-login-enter-active{
-    transition: all .8s ease;
+    transition: all .4s ease;
   }
   .show-login-leave-active{
-    transition: all .8s ease;
+    transition: all .4s ease;
   }
   .show-login-enter,.show-login-leave-to{
+    transform: scale(0.9) translateY(50px);
     opacity: 1;
   }
 </style>

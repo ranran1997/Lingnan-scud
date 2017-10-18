@@ -231,12 +231,13 @@
     float: left;
   }
   .show-register-enter-active{
-    transition: all .8s ease;
+    transition: all .4s ease;
   }
   .show-register-leave-active{
-    transition: all .8s ease;
+    transition: all .4s ease;
   }
   .show-register-enter,.show-register-leave-to{
+    transform: scale(0.9) translateY(-50px);
     opacity: 1;
   }
 </style>

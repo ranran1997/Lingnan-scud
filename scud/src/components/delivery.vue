@@ -10,13 +10,14 @@
         </div>
       </div>
       <div class="form">
-        <div class="form-item company" @click="showCompany = !showCompany" >
-        <span class="icon-wrap">
-          <img src="./../assets/company.png" alt="">
-        </span>
+        <div class="form-item company" @click="showCompany = !showCompany">
+          <span class="icon-wrap">
+            <img src="./../assets/company.png" alt="">
+          </span>
           <span class="item-name">快递公司</span>
           <span class="icon-chevron-right"></span>
           <span class="item-value">{{ picked }}</span>
+          <span v-if="!showCompany && !picked" class="company-tip">请选择快递公司</span>
         </div>
         <transition name="company-form">
           <div v-if="showCompany" class="company-form">
@@ -73,61 +74,40 @@
             </div>
           </div>
         </transition>
-        <div class="form-item weight" @click="showWeight = !showWeight">
-        <span class="icon-wrap">
-          <img src="./../assets/weight.png" alt="">
-        </span>
+        <div class="form-item weight">
+          <span class="icon-wrap">
+            <img src="./../assets/weight.png" alt="">
+          </span>
           <span class="item-name">物品重量</span>
           <span class="icon-chevron-right"></span>
-          <span class="item-value">{{ selected }}</span>
+          <span class="item-value">
+            <div class="add" @click.stop.prevent="add">
+              <img src="./../assets/add.png" width="32" height="32" alt="">
+            </div>
+            <div class="count" v-show="count>0">{{ count }}  kg</div>
+            <div class="decrease" v-show="count>1" @click.stop.prevent="decrease">
+              <img src="./../assets/decrease.png" width="29" height="29" alt="">
+            </div>
+          </span>
         </div>
-        <transition name="weight-form">
-          <div v-if="showWeight" class="weight-form">
-            <div class="weight-wrap">
-              <div class="weight-icon">
-                <img src="./../assets/weight.png" alt="">
-              </div>
-              <p>请选择物品重量</p>
-              <div class="confirm" @click="showWeight = !showWeight" v-if="showWeight">确认</div>
-            </div>
-            <div class="close" @click="showWeight = !showWeight" v-if="showWeight">
-              <span class="left"></span>
-              <span class="right"></span>
-            </div>
-          </div>
-        </transition>
         <div class="form-item delTime">
-        <span class="icon-wrap">
-          <img src="./../assets/delTime.png" alt="">
-        </span>
+          <span class="icon-wrap">
+            <img src="./../assets/delTime.png" alt="">
+          </span>
           <span class="item-name">送达时间</span>
           <span class="icon-chevron-right"></span>
-          <span class="item-value">{{ choosed }}</span>
+          <date-picker :date="startTime" :option="option" :limit="limit"></date-picker>
         </div>
-        <transition name="delTime-form">
-          <div v-if="showDelTime" class="delTime-form">
-            <div class="delTime-wrap">
-              <div class="delTime-icon">
-                <img src="./../assets/delTime.png" alt="">
-              </div>
-              <p>请选择送达时间</p>
-              <div class="confirm" @click="showDelTime = !showDelTime" v-if="showDelTime">确认</div>
-            </div>
-            <div class="close" @click="showDelTime = !showDelTime" v-if="showDelTime">
-              <span class="left"></span>
-              <span class="right"></span>
-            </div>
+        <router-link to="/delReceive">
+          <div class="form-item">
+            <span class="icon-wrap">
+              <img src="./../assets/address.png" alt="">
+            </span>
+            <span class="item-name">收货地址</span>
+            <span class="icon-chevron-right"></span>
           </div>
-        </transition>
-        <div class="form-item address">
-        <span class="icon-wrap">
-          <img src="./../assets/address.png" alt="">
-        </span>
-          <span class="item-name">收货地址</span>
-        </div>
+        </router-link>
         <div @click="showCompany = !showCompany" class="company-mask" v-if="showCompany"></div>
-        <div @click="showWeight = !showWeight" class="weight-mask" v-if="showWeight"></div>
-        <div @click="showDelTime = !showDelTime" class="delTime-mask" v-if="showDelTime"></div>
       </div>
       <div class="next">下一步</div>
       <div class="pricerule">计价规则</div>
@@ -137,27 +117,86 @@
 
 <script>
   import header from '@/components/header'
+  import myDatepicker from 'vue-datepicker/vue-datepicker-es6.vue'
 
   export default {
     name: 'delivery',
     data () {
       return {
         showCompany: false,
-        showWeight: false,
-        showDelTime: false,
         picked: '',
         selected: '',
-        choosed: '',
-        defaultClass: -1
+        count: '1',
+        defaultClass: -1,
+        startTime: {
+          time: ''
+        },
+        option: {
+          type: 'min',
+          week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+          month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          format: 'YYYY-MM-DD HH:mm',
+          placeholder: '请选择送达时间',
+          inputStyle: {
+            'width': '100%',
+            'display': 'inline-block',
+            'height': '100px',
+            'text-align': 'right',
+            'float': 'right',
+            'border': 'none',
+            'outline': 'none',
+            'line-height': '100px',
+            'font-size': '1.8rem',
+            'color': '#666'
+          },
+          color: {
+            header: '#1199f9',
+            headerText: '#fff'
+          },
+          buttons: {
+            ok: '确认',
+            cancel: '取消'
+          },
+          overlayOpacity: 0.5, // 0.5 as default
+          dismissible: true // as true as default
+        },
+        timeoption: {
+          type: 'min',
+          week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+          month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          format: 'YY-MM-DD HH:mm'
+        },
+        multiOption: {
+          type: 'multi-day',
+          week: ['Mo', 'Tu', 'We', 'Th', 'Fr', 'Sa', 'Su'],
+          month: ['January', 'February', 'March', 'April', 'May', 'June', 'July', 'August', 'September', 'October', 'November', 'December'],
+          format: 'YY-MM-DD HH:mm'
+        },
+        limit: [{
+          type: 'weekday',
+          available: [1, 2, 3, 4, 5]
+        },
+        {
+          type: 'fromto',
+          from: '2016-02-01',
+          to: '2022-02-20'
+        }]
       }
     },
     methods: {
       addClass: function (index) {
         this.defaultClass = index
+      },
+      add: function () {
+        this.count++
+      },
+      decrease: function () {
+        this.count--
       }
     },
     components: {
-      'v-header': header
+      'v-header': header,
+      'date-picker': myDatepicker
     }
   }
 </script>
@@ -220,6 +259,7 @@
     line-height: 100px;
     font-size: 1.6rem;
     float: left;
+    color: #333;
   }
   .form-item span.item-value{
     width: auto;
@@ -227,7 +267,28 @@
     line-height: 100px;
     font-size: 1.8rem;
     float: right;
-    margin-right: 20px;
+    margin-right: 34px;
+  }
+  .company-tip{
+    width: auto;
+    height: 100px;
+    line-height: 100px;
+    font-size: 1.8rem;
+    color: #666;
+    float: right;
+  }
+  .decrease,.count,.add{
+    float: right;
+  }
+  .decrease{
+    margin-top: 4px;
+  }
+  .count{
+    padding: 0 20px;
+    font-size: 1.8rem;
+  }
+  .add{
+    margin-top: 5px;
   }
   .form-item span.icon-chevron-right{
     width: auto;
@@ -267,56 +328,20 @@
     border-radius: 8px;
     z-index: 5;
   }
-  .weight-form{
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    width: 500px;
-    height: 640px;
-    margin-left: -250px;
-    margin-top: -320px;
-    background-color: #fff;
-    border-radius: 8px;
-    z-index: 5;
-  }
-  .delTime-form{
-    position: fixed;
-    left: 50%;
-    top: 50%;
-    width: 500px;
-    height: 640px;
-    margin-left: -250px;
-    margin-top: -320px;
-    background-color: #fff;
-    border-radius: 8px;
-    z-index: 5;
-  }
   .company-form-enter-active{
     transition: all .8s ease;
   }
   .company-form-enter,.company-form-leave-to{
     opacity: 1;
   }
-  .weight-form-enter-active{
-     transition: all .8s ease;
-   }
-  .weight-form-enter,.weight-form-leave-to{
-    opacity: 1;
-  }
-  .delTime-form-enter-active{
-    transition: all .8s ease;
-  }
-  .delTime-form-enter,.delTime-form-leave-to{
-    opacity: 1;
-  }
-  .company-wrap,.weight-wrap,delTime-wrap{
+  .company-wrap{
     padding: 40px;
   }
-  .company-icon,.weight-icon,delTime-icon{
+  .company-icon{
     width: 100%;
     height: 150px;
   }
-  .company-icon img,.weight-icon img{
+  .company-icon img,.weight-icon img,.delTime-icon img{
     width: 94px;
     height: 94px;
     margin-top: 20px;
