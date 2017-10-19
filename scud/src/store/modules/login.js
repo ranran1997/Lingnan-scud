@@ -1,8 +1,24 @@
-import {USER_SIGNIN, USER_SIGNOUT, USER_REG, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SENDCODE, SAVETIME} from '../types'
+import {USER_SIGNIN, USER_SIGNOUT, USER_REG, DEL_RECEIVE, ShowDelReceive, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SENDCODE, SAVETIME} from '../types'
 var isLoggedIn = function () {
   var token = localStorage.getItem('user')
   if (token) {
     return JSON.parse(localStorage.getItem('user'))
+  } else {
+    return false
+  }
+}
+var getDelReceive = function () {
+  var isDelReceive = localStorage.getItem('delReceive')
+  if (isDelReceive) {
+    return JSON.parse(localStorage.getItem('delReceive'))
+  } else {
+    return null
+  }
+}
+var getShowDelReceive = function () {
+  var isDelReceive = localStorage.getItem('delReceive')
+  if (isDelReceive) {
+    return true
   } else {
     return false
   }
@@ -15,7 +31,9 @@ const state = {
   showReg: false,
   code: null,
   sendEmail: false,
-  sendTime: null
+  sendTime: null,
+  showDelReceive: getShowDelReceive(),
+  delReceive: getDelReceive() || null
 }
 
 const mutations = {
@@ -23,6 +41,13 @@ const mutations = {
     console.log('show')
     state.showReg = true
     state.showLogin = false
+  },
+  [DEL_RECEIVE] (state, delivery) {
+    localStorage.setItem('delReceive', JSON.stringify(delivery))
+    state.showDelReceive = true
+  },
+  [ShowDelReceive] (state) {
+    state.showDelReceive = true
   },
   [SENDCODE] (state) {
     state.sendEmail = true

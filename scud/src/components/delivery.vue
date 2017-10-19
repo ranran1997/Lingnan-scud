@@ -105,6 +105,7 @@
             </span>
             <span class="item-name">收货地址</span>
             <span class="icon-chevron-right"></span>
+            <span class="delAddr">{{ delReceive.city + delReceive.detail }}</span>
           </div>
         </router-link>
         <div @click="showCompany = !showCompany" class="company-mask" v-if="showCompany"></div>
@@ -118,6 +119,7 @@
 <script>
   import header from '@/components/header'
   import myDatepicker from 'vue-datepicker/vue-datepicker-es6.vue'
+  import { mapGetters } from 'vuex'
 
   export default {
     name: 'delivery',
@@ -182,6 +184,12 @@
           to: '2022-02-20'
         }]
       }
+    },
+    computed: {
+      ...mapGetters({
+        delReceive: 'DelReceive',
+        showDelReceive: 'ShowDelReceive'
+      })
     },
     methods: {
       addClass: function (index) {
@@ -268,6 +276,18 @@
     font-size: 1.8rem;
     float: right;
     margin-right: 34px;
+  }
+  .delAddr{
+    height: 100px;
+    line-height: 100px;
+    font-size: 1.8rem;
+    float: right;
+    margin-right: 34px;
+    width: 300px;
+    color: #333;
+    text-overflow: ellipsis;
+    overflow: hidden;
+    white-space: nowrap;
   }
   .company-tip{
     width: auto;

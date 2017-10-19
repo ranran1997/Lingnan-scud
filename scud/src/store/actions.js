@@ -1,5 +1,8 @@
 import api from '../api'
-import {USER_SIGNIN, USER_SIGNOUT, USER_REG, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SENDCODE, SAVETIME} from './types'
+import {
+  USER_SIGNIN, USER_SIGNOUT, USER_REG, DEL_RECEIVE, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SENDCODE,
+  SAVETIME, ShowDelReceive
+} from './types'
 
 export const UserLogin = ({ commit }, data) => {
   api.localLogin(data).then(function (response) {
@@ -14,7 +17,10 @@ export const UserLogin = ({ commit }, data) => {
       console.log(error)
     })
 }
-
+export const DelReceive = ({ commit }, data) => {
+  commit(DEL_RECEIVE, data)
+  commit(ShowDelReceive)
+}
 export const ShowLogin = ({ commit }) => {
   commit(SHOW_LOGIN)
 }

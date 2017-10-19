@@ -7,6 +7,7 @@ import errand from '@/components/errand'
 import entrance from '@/components/entrance'
 import login from '@/components/login'
 import register from '@/components/register'
+import delReceive from '@/components/delReceive'
 import error from '@/components/error'
 
 Vue.use(Router)
@@ -16,7 +17,7 @@ export default new Router({
   saveScrollPosition: true,
   routes: [
     {
-      path: '/',
+      path: '/entrance',
       name: 'entrance',
       component: entrance
     },
@@ -26,7 +27,7 @@ export default new Router({
       component: user
     },
     {
-      path: '/homepage',
+      path: '/',
       name: 'homepage',
       component: homepage,
       meta: { auth: false }
@@ -52,6 +53,11 @@ export default new Router({
       name: 'register',
       component: register,
       meta: { auth: false }
+    },
+    {
+      path: '/delReceive',
+      name: 'delReceive',
+      component: delReceive
     },
     {
       path: '*',

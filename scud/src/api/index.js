@@ -6,20 +6,20 @@ Vue.use(VueAxios, axios);
 
 var instance = axios.create();
 
-axios.defaults.baseURL = 'http://192.168.1.118:8080/project';
+axios.defaults.baseURL = 'http://192.168.1.123:81/ewei-user-project/api';
 
 export default {
   localLogin: function (data) {
-    return Vue.axios.post('/api/login', data)
+    return Vue.axios.post('/login', data)
   },
   localLogout: function () {
-    return instance.post('/api/logout')
+    return instance.post('/logout')
   },
   localReg: function (data) {
-    return Vue.axios.post('/api/reg', data)
+    return Vue.axios.post('/reg', data)
   },
   localEmail: function (data) {
     console.log(data);
-    return Vue.axios.post('/api/sendEmail', data)
+    return Vue.axios.post('/sendEmail', data)
   }
 }

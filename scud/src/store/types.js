@@ -8,3 +8,5 @@ export const SHOW_REG = 'SHOW_REG' // 显示注册页面
 export const SAVECODE = 'SAVECODE' // 验证码保存
 export const SENDCODE = 'SENDCODE' // 发送验证码
 export const SAVETIME = 'SAVETIME' // 存储发送时间
+export const DEL_RECEIVE = 'DEL_RECEIVE' // 存储收货地址
+export const ShowDelReceive = 'ShowDelReceive' // 显示存储收货地址
