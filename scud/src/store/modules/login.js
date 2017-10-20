@@ -1,26 +1,42 @@
-import {USER_SIGNIN, USER_SIGNOUT, USER_REG, DEL_RECEIVE, ShowDelReceive, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SENDCODE, SAVETIME} from '../types'
-var isLoggedIn = function () {
-  var token = localStorage.getItem('user')
+import {USER_SIGNIN, USER_SIGNOUT, USER_REG, DEL_RECEIVE, ShowDelReceive, ADD_COMPANY, ADD_COUNT, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SENDCODE, SAVETIME} from '../types'
+const isLoggedIn = function () {
+  const token = localStorage.getItem('user')
   if (token) {
     return JSON.parse(localStorage.getItem('user'))
   } else {
     return false
   }
 }
-var getDelReceive = function () {
-  var isDelReceive = localStorage.getItem('delReceive')
+const getDelReceive = function () {
+  const isDelReceive = localStorage.getItem('delReceive')
   if (isDelReceive) {
     return JSON.parse(localStorage.getItem('delReceive'))
   } else {
     return null
   }
 }
-var getShowDelReceive = function () {
-  var isDelReceive = localStorage.getItem('delReceive')
+const getShowDelReceive = function () {
+  const isDelReceive = localStorage.getItem('delReceive')
   if (isDelReceive) {
     return true
   } else {
     return false
+  }
+}
+const getAddCompany = function () {
+  const isCompany = localStorage.getItem('company')
+  if (isCompany) {
+    return JSON.parse(localStorage.getItem('company'))
+  } else {
+    return false
+  }
+}
+const getAddCount = function () {
+  const isCount = localStorage.getItem('count')
+  if (isCount) {
+    return JSON.parse(localStorage.getItem('count'))
+  } else {
+    return '1'
   }
 }
 
@@ -33,7 +49,9 @@ const state = {
   sendEmail: false,
   sendTime: null,
   showDelReceive: getShowDelReceive(),
-  delReceive: getDelReceive() || null
+  delReceive: getDelReceive() || null,
+  addCompany: getAddCompany() || null,
+  addCount: getAddCount() || null
 }
 
 const mutations = {
@@ -48,6 +66,12 @@ const mutations = {
   },
   [ShowDelReceive] (state) {
     state.showDelReceive = true
+  },
+  [ADD_COMPANY] (state, company) {
+    localStorage.setItem('company', JSON.stringify(company))
+  },
+  [ADD_COUNT] (state, count) {
+    localStorage.setItem('count', JSON.stringify(count))
   },
   [SENDCODE] (state) {
     state.sendEmail = true

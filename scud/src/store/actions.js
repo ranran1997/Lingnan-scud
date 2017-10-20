@@ -1,7 +1,7 @@
 import api from '../api'
 import {
   USER_SIGNIN, USER_SIGNOUT, USER_REG, DEL_RECEIVE, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SENDCODE,
-  SAVETIME, ShowDelReceive
+  SAVETIME, ADD_COMPANY, ShowDelReceive, ADD_COUNT
 } from './types'
 
 export const UserLogin = ({ commit }, data) => {
@@ -20,6 +20,12 @@ export const UserLogin = ({ commit }, data) => {
 export const DelReceive = ({ commit }, data) => {
   commit(DEL_RECEIVE, data)
   commit(ShowDelReceive)
+}
+export const AddCompany = ({ commit }, data) => {
+  commit(ADD_COMPANY, data)
+}
+export const AddCount = ({ commit }, data) => {
+  commit(ADD_COUNT, data)
 }
 export const ShowLogin = ({ commit }) => {
   commit(SHOW_LOGIN)

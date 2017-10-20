@@ -6,3 +6,4 @@ export const GetCode = state => state.login.code;
 export const GetTime = state => state.login.sendTime;
 export const DelReceive = state => state.login.delReceive;
 export const ShowDelReceive = state => state.login.showDelReceive;
+export const AddCompany = state => state.login.addCompany;

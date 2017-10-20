@@ -10,3 +10,5 @@ export const SENDCODE = 'SENDCODE' // 发送验证码
 export const SAVETIME = 'SAVETIME' // 存储发送时间
 export const DEL_RECEIVE = 'DEL_RECEIVE' // 存储收货地址
 export const ShowDelReceive = 'ShowDelReceive' // 显示存储收货地址
+export const ADD_COMPANY = 'ADD_COMPANY' // 显示存储收货地址
+export const ADD_COUNT = 'ADD_COUNT' // 显示物品重量

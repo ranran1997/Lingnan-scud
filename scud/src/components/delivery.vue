@@ -66,7 +66,7 @@
                   </tr>
                 </table>
               </form>
-              <div class="confirm" @click="showCompany = !showCompany" v-if="showCompany">确认</div>
+              <div class="confirm" @click="addCompany(); showCompany = !showCompany" v-if="showCompany">确认</div>
             </div>
             <div class="close" @click="showCompany = !showCompany" v-if="showCompany">
               <span class="left"></span>
@@ -119,16 +119,51 @@
 <script>
   import header from '@/components/header'
   import myDatepicker from 'vue-datepicker/vue-datepicker-es6.vue'
-  import { mapGetters } from 'vuex'
+  import { mapActions } from 'vuex'
 
   export default {
     name: 'delivery',
     data () {
+      const getAddCompany = function () {
+        const isCompany = localStorage.getItem('company')
+        if (isCompany) {
+          return JSON.parse(localStorage.getItem('company'))
+        } else {
+          return ''
+        }
+      }
+      const getDelReceiveCity = function () {
+        const isCompany = localStorage.getItem('delReceive')
+        if (isCompany) {
+          return JSON.parse(localStorage.getItem('delReceive')).city
+        } else {
+          return ''
+        }
+      }
+      const getDelReceiveDetail = function () {
+        const isDelReceive = localStorage.getItem('delReceive')
+        if (isDelReceive) {
+          return JSON.parse(localStorage.getItem('delReceive')).detail
+        } else {
+          return ''
+        }
+      }
+      const getCount = function () {
+        const isCount = localStorage.getItem('count')
+        if (isCount) {
+          return JSON.parse(localStorage.getItem('count'))
+        } else {
+          return '1 '
+        }
+      }
       return {
         showCompany: false,
-        picked: '',
-        selected: '',
-        count: '1',
+        count: getCount(),
+        picked: getAddCompany(),
+        delReceive: {
+          city: getDelReceiveCity(),
+          detail: getDelReceiveDetail()
+        },
         defaultClass: -1,
         startTime: {
           time: ''
@@ -186,9 +221,9 @@
       }
     },
     computed: {
-      ...mapGetters({
-        delReceive: 'DelReceive',
-        showDelReceive: 'ShowDelReceive'
+      ...mapActions({
+        AddCompany: 'AddCompany',
+        AddCount: 'AddCount'
       })
     },
     methods: {
@@ -197,9 +232,13 @@
       },
       add: function () {
         this.count++
+        this.$store.dispatch('AddCount', this.count)
       },
       decrease: function () {
         this.count--
+      },
+      addCompany: function () {
+        this.$store.dispatch('AddCompany', this.picked)
       }
     },
     components: {
