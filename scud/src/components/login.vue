@@ -1,5 +1,5 @@
 <template>
-  <form v-if="showLogin" class="login" method="post" @submit.prevent="sub()">
+  <div v-if="showLogin" class="login">
     <div class="g-login">
       <a @click="showChange"><i class="fa fa-remove"></i></a>
       <div class="title">账号密码登录</div>
@@ -7,7 +7,7 @@
         <span>
           <img src="./../assets/user2.png" alt="">
         </span>
-        <input class="user-input" type="text" v-model="user.name" placeholder="用户名/邮箱号">
+        <input class="user-input" type="text" v-model="user.email" placeholder="用户名/邮箱号">
       </div>
       <div class="wrap">
         <span>
@@ -17,9 +17,9 @@
       </div>
       <div v-show="error" class="error">{{error}}</div>
       <div class="forget">忘记密码？</div>
-      <input type="submit" value="登录" class="login-submit">
+      <input type="submit" value="登录" @click="sub()" class="login-submit">
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -30,7 +30,7 @@
         error: false,
         isLogin: false,
         user: {
-          name: '',
+          email: '',
           password: ''
         }
       }
@@ -50,7 +50,7 @@
     },
     methods: {
       sub () {
-        if (!this.user.name || !this.user.password) {
+        if (!this.user.email || !this.user.password) {
           this.error = '输入不得为空'
         } else {
           this.$store.dispatch('UserLogin', this.user);

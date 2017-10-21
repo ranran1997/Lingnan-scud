@@ -153,7 +153,7 @@
         if (isCount) {
           return JSON.parse(localStorage.getItem('count'))
         } else {
-          return '1 '
+          return '1'
         }
       }
       return {
@@ -223,7 +223,8 @@
     computed: {
       ...mapActions({
         AddCompany: 'AddCompany',
-        AddCount: 'AddCount'
+        AddCount: 'AddCount',
+        DeliveryOrder: 'DeliveryOrder'
       })
     },
     methods: {
@@ -239,6 +240,9 @@
       },
       addCompany: function () {
         this.$store.dispatch('AddCompany', this.picked)
+      },
+      deliveryOrder: function () {
+        this.$store.dispatch('DeliveryOrder', this.deliveryOrder)
       }
     },
     components: {

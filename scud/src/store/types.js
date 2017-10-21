@@ -12,3 +12,4 @@ export const DEL_RECEIVE = 'DEL_RECEIVE' // 存储收货地址
 export const ShowDelReceive = 'ShowDelReceive' // 显示存储收货地址
 export const ADD_COMPANY = 'ADD_COMPANY' // 显示存储收货地址
 export const ADD_COUNT = 'ADD_COUNT' // 显示物品重量
+export const SAVEORDER = 'SAVEORDER' // 显示物品重量

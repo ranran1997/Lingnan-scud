@@ -1,5 +1,5 @@
 <template>
-  <form v-if="showReg" class="register" method="post" @submit.prevent="reg()">
+  <div v-if="showReg" class="register">
     <div class="blur"></div>
     <div class="g-reg">
       <a @click="showChange"><i class="fa fa-remove"></i></a>
@@ -21,7 +21,7 @@
           <img src="./../assets/vcode.png" alt="">
         </span>
         <input type="text" class="v-input" v-model="user.code" placeholder="请输入验证码">
-        <a href="#"  class="send" @click="send" >发送验证码</a>
+        <a href="#"  class="send" @click="send()" >发送验证码</a>
       </div>
       <div class="wrap">
         <span>
@@ -42,9 +42,9 @@
         </span>
         <p>我已阅读并同意《使用条款和协议》</p>
       </div>
-      <input type="submit" value="提交" class="register-submit">
+      <input type="submit" value="提交" @click="reg()" class="register-submit">
     </div>
-  </form>
+  </div>
 </template>
 
 <script>
@@ -92,8 +92,6 @@
       reg: function () {
         if (!this.user.name || !this.user.password || !this.user.password_r) {
           this.error = '输入不得为空'
-        } else if (this.getCode !== this.user.code) {
-          this.error = '验证码输入错误'
         } else if (this.user.password !== this.user.password_r) {
           this.error = '两次密码输入不一致'
         } else if (this.user.password.length < 3) {

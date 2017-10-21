@@ -3,9 +3,9 @@
     <div class="user">
       <div class="basic-info">
         <div class="avatar">
-          <img src="./../assets/user1.png" width="80" height="80" alt="">
+          <img :src="{ avatarUrl }" width="80" height="80" alt="">
         </div>
-        <div class="phone">18888888888</div>
+        <div class="email">{{ email }}</div>
       </div>
     </div>
     <div class="balance-info">
@@ -39,7 +39,29 @@
 
 <script>
   export default {
-    name: 'user'
+    name: 'user',
+    data () {
+      const getUserEmail = function () {
+        const isUser = localStorage.getItem('user')
+        if (isUser) {
+          return JSON.parse(localStorage.getItem('user')).email
+        } else {
+          return ''
+        }
+      }
+      const getAvatarUrl = function () {
+        const isUser = localStorage.getItem('user')
+        if (isUser) {
+          return JSON.parse(localStorage.getItem('user')).avaterUrl
+        } else {
+          return ''
+        }
+      }
+      return {
+        avatarUrl: getAvatarUrl(),
+        email: getUserEmail()
+      }
+    }
   }
 </script>
 
@@ -70,7 +92,7 @@
     border: 1px solid #fff;
     margin: 0 auto;
   }
-  .phone{
+  .email{
     margin-top: 20px;
     font-size: 1.5rem;
     color: #fff;

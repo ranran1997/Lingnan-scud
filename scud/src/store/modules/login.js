@@ -1,4 +1,4 @@
-import {USER_SIGNIN, USER_SIGNOUT, USER_REG, DEL_RECEIVE, ShowDelReceive, ADD_COMPANY, ADD_COUNT, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SENDCODE, SAVETIME} from '../types'
+import {USER_SIGNIN, USER_SIGNOUT, USER_REG, DEL_RECEIVE, ShowDelReceive, ADD_COMPANY, ADD_COUNT, SAVEORDER, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SENDCODE, SAVETIME} from '../types'
 const isLoggedIn = function () {
   const token = localStorage.getItem('user')
   if (token) {
@@ -46,6 +46,7 @@ const state = {
   gotoLog: false,
   showReg: false,
   code: null,
+  order: false,
   sendEmail: false,
   sendTime: null,
   showDelReceive: getShowDelReceive(),
@@ -93,6 +94,10 @@ const mutations = {
   [SAVECODE] (state, code) {
     state.code = code
     console.log(code)
+  },
+  [SAVEORDER] (state, order) {
+    localStorage.setItem('order', JSON.stringify(order))
+    state.order = true
   },
   [SAVETIME] (state, time) {
     state.sendTime = time

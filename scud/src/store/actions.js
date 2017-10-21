@@ -1,13 +1,12 @@
 import api from '../api'
 import {
-  USER_SIGNIN, USER_SIGNOUT, USER_REG, DEL_RECEIVE, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SENDCODE,
+  USER_SIGNOUT, USER_REG, DEL_RECEIVE, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SAVEORDER,
   SAVETIME, ADD_COMPANY, ShowDelReceive, ADD_COUNT
 } from './types'
 
-export const UserLogin = ({ commit }, data) => {
+export const UserLogin = (data) => {
   api.localLogin(data).then(function (response) {
     if (response.data.type === true) {
-      commit(USER_SIGNIN, response.data.data)
       window.location = '/homepage'
     } else {
       window.location = '/'
@@ -56,15 +55,23 @@ export const UserReg = ({ commit }, data) => {
 }
 
 export const SendEmail = ({ commit }, data) => {
-  api.localEmail(data).then(function (response) {
+  api.localEmail(data).then(function () {
+    alert('right')
+    commit(SAVECODE, null)
+    commit(SAVETIME, null)
+  })
+  .catch(function (error) {
+    console.log(error)
+  })
+}
+export const DeliveryOrder = ({ commit }, data) => {
+  api.localDeliveryOrder(data).then(function (response) {
     console.log(response.data.type)
     if (response.data.type === true) {
-      commit(SENDCODE)
-      commit(SAVECODE, response.data.data)
+      window.location = '/homepage'
+      commit(SAVEORDER, response.data.data)
     } else {
-      alert('请输入有效的邮箱')
-      commit(SAVECODE, null)
-      commit(SAVETIME, null)
+      alert('请求异常')
     }
   })
     .catch(function (error) {
