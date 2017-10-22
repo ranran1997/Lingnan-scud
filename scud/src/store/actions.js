@@ -1,6 +1,6 @@
 import api from '../api'
 import {
-  USER_SIGNOUT, USER_REG, DEL_RECEIVE, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SAVEORDER,
+  USER_SIGNOUT, DEL_RECEIVE, SHOW_LOGIN, NOLOG, SHOW_REG, NOREG, SAVECODE, SAVEORDER,
   SAVETIME, ADD_COMPANY, ShowDelReceive, ADD_COUNT
 } from './types'
 
@@ -9,7 +9,7 @@ export const UserLogin = (data) => {
     if (response.data.type === true) {
       window.location = '/homepage'
     } else {
-      window.location = '/'
+      alert('请输入正确的用户名和密码')
     }
   })
     .catch(function (error) {
@@ -43,11 +43,9 @@ export const UserLogout = ({ commit }) => {
 }
 
 export const UserReg = ({ commit }, data) => {
-  api.localReg(data).then(function (response) {
-    if (response.data.type === true) {
-      commit(USER_REG, response.data.data)
-      window.location = '/person'
-    }
+  api.localReg(data).then(function () {
+    alert('请到你的邮箱点击激活链接，激活后才可登录')
+    commit(SHOW_LOGIN)
   })
     .catch(function (error) {
       console.log(error)

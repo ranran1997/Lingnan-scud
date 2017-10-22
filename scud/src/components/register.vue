@@ -18,13 +18,6 @@
       </div>
       <div class="wrap">
         <span>
-          <img src="./../assets/vcode.png" alt="">
-        </span>
-        <input type="text" class="v-input" v-model="user.code" placeholder="请输入验证码">
-        <a href="#"  class="send" @click="send()" >发送验证码</a>
-      </div>
-      <div class="wrap">
-        <span>
           <img src="./../assets/password.png" alt="">
         </span>
         <input type="password" v-model="user.password" placeholder="请输入密码">
@@ -42,7 +35,7 @@
         </span>
         <p>我已阅读并同意《使用条款和协议》</p>
       </div>
-      <input type="submit" value="提交" @click="reg()" class="register-submit">
+      <input type="submit" value="注册" @click="reg();" class="register-submit">
     </div>
   </div>
 </template>
@@ -57,8 +50,7 @@
           name: '',
           email: '',
           password: '',
-          password_r: '',
-          code: ''
+          password_r: ''
         }
       }
     },
@@ -80,17 +72,11 @@
       },
       sendEmail () {
         return this.SendEmail
-      },
-      getCode () {
-        return this.GetCode
-      },
-      getTime () {
-        return this.GetTime
       }
     },
     methods: {
       reg: function () {
-        if (!this.user.name || !this.user.password || !this.user.password_r) {
+        if (!this.user.name || !this.user.password || !this.user.password_r || !this.user.email) {
           this.error = '输入不得为空'
         } else if (this.user.password !== this.user.password_r) {
           this.error = '两次密码输入不一致'
@@ -102,9 +88,15 @@
       },
       showChange (e) {
         this.$store.dispatch('HideReg');
-      },
-      send (e) {
-        if (!this.user.email) {
+      }
+      /* send (e) {
+        if (!this.user.name || !this.user.password || !this.user.password_r) {
+          this.error = '输入不得为空'
+        } else if (this.user.password !== this.user.password_r) {
+          this.error = '两次密码输入不一致'
+        } else if (this.user.password.length < 3) {
+          this.error = '密码长度不得小于3位'
+        } else if () {
           this.error = '邮箱不得为空'
         } else if (this.getCode) {
           // 当超过15min重新发送
@@ -121,7 +113,7 @@
           this.$store.dispatch('SendEmail', this.user);
           alert('验证码已发送，15分钟内失效，请注意查收');
         }
-      }
+      } */
     }
   }
 </script>
